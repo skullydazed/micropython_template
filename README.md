@@ -1,8 +1,16 @@
 # Template for MicroPython development
 
-This repo is a Template Repository you can use to initialize a MicroPython project. 
+This repo is a Template Repository you can use to initialize a MicroPython project. It has everything you need to get started immediately, including a Hello World example.
 
 # Setup
+
+To use this as a base for your own project click "Use this template" and follow the prompts to create your own repository. From there you can clone that repo and begin to modify for your purposes.
+
+If you do not have a GitHub account, or do not wish to create a GitHub repository, you can clone this repo to your local filesystem:
+
+```bash
+git clone https://github.com/skullydazed/micropython_template.git my_cool_project
+```
 
 ## Dependencies
 
@@ -11,6 +19,10 @@ Run `make install_deps` to install the dependencies.
 ## Prepare the Raspberry Pi Pico
 
 You will need to [install the MicroPython firmware](https://www.raspberrypi.com/documentation/microcontrollers/micropython.html#drag-and-drop-micropython) on your Raspberry Pi Pico.
+
+## Code
+
+A basic [`main.py`](main.py) has been included so that you can test your setup immediately. It will blink the onboard LED 5 times and then exit to the REPL.
 
 # Usage
 
