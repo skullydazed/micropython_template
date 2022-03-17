@@ -1,28 +1,48 @@
 FILES?=*.py
 PICO_PORT?=/dev/pico
 
+define check_for_tio
+	@TIO_PID="$(shell pidof tio)" ;\
+	if [ -n "$$TIO_PID" ]; then \
+		printf "Tio is running! Should we kill it? [y/N] "; \
+		read ANSWER; \
+		if [ "$$ANSWER" = "y" ]; then \
+			kill $$TIO_PID; \
+		else \
+			printf "\nCan not proceed while serial port is in use!\n\n"; \
+			exit 1; \
+		fi; \
+	fi
+endef
+
 # What happens if you run make without any args
 default: upload console
 
 # Commands that do things to the Raspberry Pi Pico
 upload:
+	$(call check_for_tio)
 	for file in $(FILES); do \
 		ampy --port $(PICO_PORT) put $$file; \
 	done
 
 upload_mods:
+	$(call check_for_tio)
 	cd site-packages; ampy --port $(PICO_PORT) put src lib; cd ..
 
 console:
+	$(call check_for_tio)
 	tio $(PICO_PORT)
 
 ls:
+	$(call check_for_tio)
 	ampy --port $(PICO_PORT) ls -lr
 
 reset:
+	$(call check_for_tio)
 	ampy --port $(PICO_PORT) reset
 
 rm-rf:
+	$(call check_for_tio)
 	ampy --port $(PICO_PORT) rmdir /
 
 # Commands for the local machine
