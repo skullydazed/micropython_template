@@ -7,7 +7,7 @@ define check_for_tio
 		printf "Tio is running! Should we kill it? [y/N] "; \
 		read ANSWER; \
 		if [ "$$ANSWER" = "y" ]; then \
-			kill $$TIO_PID; \
+			kill -SIGHUP $$TIO_PID; \
 		else \
 			printf "\nCan not proceed while serial port is in use!\n\n"; \
 			exit 1; \
